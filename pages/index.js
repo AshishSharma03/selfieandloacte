@@ -1,5 +1,4 @@
-import { Height } from '@mui/icons-material'
-import { Button, Container,Box, IconButton, Dialog, Typography } from '@mui/material'
+import { Button, Container,Box, IconButton, Dialog} from '@mui/material'
 import React,{useCallback, useEffect, useRef, useState} from 'react'
 import Webcam from 'react-webcam'
 import CameraIcon from '@mui/icons-material/Camera';
