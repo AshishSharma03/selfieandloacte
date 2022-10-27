@@ -58,13 +58,13 @@ function Index() {
           <CameraIcon fontSize='large'/>
         </IconButton>
         {/* <Button onClick={() => setImage(null)}>Refresh</Button> */}
-        </Box>
+        </Box >
             <Dialog 
             fullScreen
             open={opnePic}
             
             >
-              <Container maxWidth="sm" >
+              <Container maxWidth="sm"  sx={{display:'flex',justifyContent:"center",alignItems:"center"}}>
 
 
           
@@ -80,7 +80,7 @@ function Index() {
         <Button onClick={() => {setImage(null);setOpenPic(false)}}>Refresh</Button>
         </Box>
         </Container>
-              </Dialog>
+        </Dialog>
 
       </Container>
       
