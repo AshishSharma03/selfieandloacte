@@ -1,16 +1,15 @@
-import { Box, Button, Stack } from '@mui/material'
+import { Box, Button, Container, Stack } from '@mui/material'
 import React, { useCallback, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 
 const videoConstraints = {
-  width: 1280,
-  height: 720,
   facingMode: "user"
 };
 
 
 function Index() {
   const [image,setImage] = useState(null)
+
 
     const webcam = useRef(null)
 
@@ -23,20 +22,29 @@ function Index() {
 
       if(!image){
         return(
-        <Box sx={{display:"flex", justifyContent:"center", alignItems:"center", height:"90vh"}}>
+
+        <Container maxWidth={"sm"}  sx={{display:"flex", justifyContent:"center", alignItems:"center", height:"90vh"}}>
+
+        {/* <Box */}
           <Stack>
-            <Webcam 
-            mirrored={true}
-            ref={webcam}
-            audio={false}
-            screenshotQuality={1}
-            videoConstraints={videoConstraints}
-            screenshotFormat="image/jpeg" 
-            />
+          
+  
+          <Webcam 
+              mirrored={true}
+              ref={webcam}
+              audio={false}
+              screenshotQuality={1}
+              videoConstraints={videoConstraints}
+              screenshotFormat="image/jpeg" 
+              imageSmoothing={true}
+              />
+
           <Button onClick={capturePhoto}>TakePhoto</Button>
             </Stack>
                     
-        </Box>)
+        {/* </Box> */}
+      </Container>
+        )
       }
       
       if(image){
