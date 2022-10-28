@@ -18,10 +18,11 @@ function Index() {
         return(
         <Box sx={{display:"flex", justifyContent:"center", alignItems:"center", height:"90vh"}}>
           <Stack>
-
             <Webcam
+
             ref={webcam}
             audio={false}
+            screenshotQuality={1}
             screenshotFormat="image/jpeg" 
             />
           <Button onClick={capturePhoto}>TakePhoto</Button>
