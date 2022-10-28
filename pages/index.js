@@ -2,6 +2,13 @@ import { Box, Button, Stack } from '@mui/material'
 import React, { useCallback, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 
+const videoConstraints = {
+  width: 1280,
+  height: 720,
+  facingMode: "user"
+};
+
+
 function Index() {
   const [image,setImage] = useState(null)
 
@@ -18,11 +25,12 @@ function Index() {
         return(
         <Box sx={{display:"flex", justifyContent:"center", alignItems:"center", height:"90vh"}}>
           <Stack>
-            <Webcam
-
+            <Webcam 
+            mirrored={true}
             ref={webcam}
             audio={false}
             screenshotQuality={1}
+            videoConstraints={videoConstraints}
             screenshotFormat="image/jpeg" 
             />
           <Button onClick={capturePhoto}>TakePhoto</Button>
