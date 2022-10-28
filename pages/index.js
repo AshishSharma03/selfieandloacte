@@ -1,119 +1,46 @@
-import { Button, Container,Box, IconButton, Dialog} from '@mui/material'
-import React,{useCallback, useEffect, useRef, useState} from 'react'
+import { Button } from '@mui/material'
+import React, { useCallback, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
-import CameraIcon from '@mui/icons-material/Camera';
-import Image from 'next/image';
-
-const videoConstraints ={
-  height:660,
-  width:360,
-  facingMode : 'environment'
-  }
-
 
 function Index() {
+  const [image,setImage] = useState(null)
 
-  const webcam = useRef(null)
-  const [image, setImage] = useState(null)
-  const [Kheight, setheight] = useState(null)
-  const [KWidth, setWidtg] = useState(null)
-  const [opnePic ,setOpenPic] = useState(false)
+    const webcam = useRef(null)
 
-    useEffect(()=>{
-      setheight(screen.height)
-      setWidtg(screen.width)
-    },[])
+      const capturePhoto = useCallback(()=>{
 
-  const capturePhoto = useCallback(async =>{
-    const imgsrc =  webcam.current.getScreenshot();
-    setImage(imgsrc);
-    setOpenPic(true)
-  },[webcam])
-
-  const onUserMedia = (e) =>{
-  
-    console.log("")
-  }
+        const imgsrc = webcam.current.getScreenshot();
+        setImage(imgsrc)
+      },[webcam])
 
 
-  if(KWidth && Kheight){
-
-    
-    return (
-      <Container maxWidth={"sm"} sx={{display:'flex',justifyContent:"center",alignItems:"center"}}>
-       
-
-            <Webcam 
+      if(!image){
+        return(
+        <div>
+            <Webcam
             ref={webcam}
-            audio={false}
-            height={Kheight}
-            width={KWidth}
-            mirrored={true}
-            screenshotFormat="image/jpeg"
-            videoConstraints={videoConstraints}
-            onUserMedia={onUserMedia}
+             audio={false}
+             screenshotFormat="image/jpeg" 
             />
-        <Box sx={{position:"absolute",bottom:"0px",padding:"10px"}}>
-        <IconButton onClick={capturePhoto} variant="contained"   sx={{backgroundColor:"red",fontSize:"30px",color:"white"}}>
-          <CameraIcon fontSize='large'/>
-        </IconButton>
-        {/* <Button onClick={() => setImage(null)}>Refresh</Button> */}
-        </Box >
-            <Dialog 
-            fullScreen
-            open={opnePic}
-            
-            >
-              <Container maxWidth="sm"  sx={{display:'flex',justifyContent:"center",alignItems:"center"}}>
-
-
-          
-            {
-              image && (
-                <div>
-                <Image src={image} alt="Screenshot"  width={KWidth} height={Kheight}/>
-                </div>
-                )
-              } 
-
-         <Box sx={{position:"absolute",bottom:"0px",padding:"10px"}}>
-        <Button onClick={() => {setImage(null);setOpenPic(false)}}>Refresh</Button>
-        </Box>
-        </Container>
-        </Dialog>
-
-      </Container>
+          <Button onClick={capturePhoto}>TakePhoto</Button>
+                    
+        </div>)
+      }
       
-      )
-    }
+      if(image){
+        return(
+          <>
+          <img src={image}  />
+          <Button onClick={() => setImage(null)}>Retake</Button>
+          </>
+        )
+      }
 
+      return(<>
+        Loading....
+      </>)
+    
 
-    return <>Loading..</>
 }
 
-
-
-// export async function getServerSideProps(){
-
-//     const res = await fetch("https://dummyjson.com/products");
-//     const data = await res.json();
-
-//     return { props: {data} }
-
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
 export default Index
-
-
