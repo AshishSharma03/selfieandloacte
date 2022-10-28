@@ -1,4 +1,4 @@
-import { Button } from '@mui/material'
+import { Box, Button, Stack } from '@mui/material'
 import React, { useCallback, useRef, useState } from 'react'
 import Webcam from 'react-webcam'
 
@@ -16,23 +16,28 @@ function Index() {
 
       if(!image){
         return(
-        <div>
+        <Box sx={{display:"flex", justifyContent:"center", alignItems:"center", height:"90vh"}}>
+          <Stack>
+
             <Webcam
             ref={webcam}
-             audio={false}
-             screenshotFormat="image/jpeg" 
+            audio={false}
+            screenshotFormat="image/jpeg" 
             />
           <Button onClick={capturePhoto}>TakePhoto</Button>
+            </Stack>
                     
-        </div>)
+        </Box>)
       }
       
       if(image){
         return(
-          <>
+          <Box sx={{display:"flex", justifyContent:"center", alignItems:"center", height:"90vh"}}>
+            <Stack>
           <img src={image}  />
           <Button onClick={() => setImage(null)}>Retake</Button>
-          </>
+            </Stack>
+          </Box>
         )
       }
 
